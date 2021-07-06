@@ -7,6 +7,7 @@ import gridStyles from "../styles/Grid.module.css";
 import GlobalHead from "./global/head";
 import GlobalHeader from "./global/header";
 import GlobalFooter from "./global/footer";
+import { ProjectFields } from "./project/[slug]";
 
 import { makeClient } from "../content";
 
@@ -17,7 +18,7 @@ export default function Projects() {
   const [error, setError] = useState({});
 
   useEffect(() => {
-    const fetchProjects = async (client) => {
+    const fetchProjects = async (client: Record<string, any>) => {
       try {
         const entries = await client.getEntries({ content_type: "project" });
         setProjects(entries.items);
@@ -30,7 +31,7 @@ export default function Projects() {
   }, [error]);
 
   return (
-    <div className={styles.container}>
+    <>
       <GlobalHead
         pageTitle="Things I Built"
         pageDescription="Projects: Code, Painting, Hobbies."
@@ -38,36 +39,42 @@ export default function Projects() {
 
       <GlobalHeader />
 
-      <h1>Things I Built</h1>
-      <p>
-        This has typically been a page where I post code projects, but I will
-        make this iteration of the page more holistic.
-      </p>
+      <main className={styles.container}>
+        <h1>Things I Built</h1>
+        <p>
+          This has typically been a page where I post code projects, but I will
+          make this iteration of the page more holistic.
+        </p>
 
-      <div className={gridStyles.grid}>
-        {projects.map((project) => {
-          const { slug, title, shortDescription, mainImage } = project.fields;
-          const htmlDesc = documentToReactComponents(shortDescription);
+        <div className={gridStyles.grid}>
+          {projects.map((project: ProjectFields) => {
+            const { slug, title, shortDescription, mainImage } = project.fields;
+            const htmlDesc = documentToReactComponents(shortDescription);
 
-          return (
-            <div key={title} className={gridStyles.card}>
-              <Image
-                width={200}
-                height={200}
-                src={`https:${mainImage.fields.file.url}`}
-                alt={`${title} logo`}
-                className={gridStyles.logo}
-              />
-              <div className="description">
-                <h3>{title}</h3>
-                {htmlDesc}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            return (
+              <a
+                key={title}
+                className={gridStyles.card}
+                href={`project/${slug}`}
+              >
+                <Image
+                  width={200}
+                  height={200}
+                  src={`https:${mainImage.fields.file.url}`}
+                  alt={`${title} logo`}
+                  className={gridStyles.logo}
+                />
+                <div className="description">
+                  <h3>{title}</h3>
+                  {htmlDesc}
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </main>
 
       <GlobalFooter />
-    </div>
+    </>
   );
 }
