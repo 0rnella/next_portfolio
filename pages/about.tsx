@@ -1,4 +1,3 @@
-import styles from "../styles/About.module.css";
 import GlobalHead from "./global/head";
 import GlobalHeader from "./global/header";
 import GlobalFooter from "./global/footer";
@@ -12,7 +11,7 @@ export default function About() {
       />
 
       <GlobalHeader />
-      <main className={styles.container}>
+      <main>
         <h1>About me</h1>
         <h2>Where (do I live/am I from)?</h2>
         <p>

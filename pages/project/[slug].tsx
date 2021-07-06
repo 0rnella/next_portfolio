@@ -7,6 +7,7 @@ import { Document } from "@contentful/rich-text-types";
 import GlobalHead from "../global/head";
 import GlobalHeader from "../global/header";
 import GlobalFooter from "../global/footer";
+import styles from "../../styles/Projects.module.css";
 
 import { makeClient } from "../../content";
 
@@ -54,21 +55,33 @@ export default function Project() {
     fetchProject(client);
   }, [slug, error]);
 
-  const { title, description, githubUrl, mainImage, demo, technologies } =
-    project.fields;
+  const {
+    title,
+    description,
+    shortDescription,
+    githubUrl,
+    mainImage,
+    demo,
+    technologies,
+  } = project.fields;
   const htmlDesc = documentToReactComponents(description);
   const logo = mainImage && mainImage.fields.file.url;
 
   return (
     <>
-      <GlobalHead pageTitle="Things I Built" pageDescription="Project: " />
+      <GlobalHead
+        pageTitle={`Project: ${title}`}
+        pageDescription={shortDescription}
+      />
 
       <GlobalHeader />
 
-      <main>
+      <main className={styles.project}>
         <h1>{title}</h1>
 
-        <Image width={300} height={300} src={`https:${logo}`} alt={logo} />
+        {logo && (
+          <Image width={300} height={300} src={`https:${logo}`} alt={logo} />
+        )}
 
         <h4>Technologies used:</h4>
         {technologies?.map((tech: string) => (

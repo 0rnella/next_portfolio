@@ -8,6 +8,7 @@ export default function GlobalHeader() {
           { label: "Home", url: "/" },
           { label: "About", url: "/about" },
           { label: "Projects", url: "/projects" },
+          { label: "Blog", url: "/blog" },
         ].map((link) => (
           <a href={link.url} key={link.label}>
             {link.label}
