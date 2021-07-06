@@ -8,7 +8,7 @@ export default function Home() {
     <div className={styles.container}>
       <GlobalHead pageTitle="Home" pageDescription="Home" />
 
-      <GlobalHeader/>
+      <GlobalHeader />
 
       <main className={styles.main}>
         <h1 className={styles.title}>{"Hi, I'm Ornella Friggit-Konaté."}</h1>
