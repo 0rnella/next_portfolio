@@ -2,11 +2,8 @@ import { useState, useEffect } from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
 
-import styles from "../styles/Projects.module.css";
 import gridStyles from "../styles/Grid.module.css";
-import GlobalHead from "./global/head";
-import GlobalHeader from "./global/header";
-import GlobalFooter from "./global/footer";
+import Page from "../components/page";
 import { ProjectFields } from "./project/[slug]";
 
 import { makeClient } from "../content";
@@ -31,20 +28,7 @@ export default function Projects() {
   }, [error]);
 
   return (
-    <>
-      <GlobalHead
-        pageTitle="Things I Built"
-        pageDescription="Projects: Code, Painting, Hobbies."
-      />
-
-      <GlobalHeader />
-
-      <main className={styles.container}>
-        <h1>Things I Built</h1>
-        <p>
-          This has typically been a page where I post code projects, but I will
-          make this iteration of the page more holistic.
-        </p>
+    <Page pageId='7mvHFS28HOJUgeYYZKHdWu'>
 
         <div className={gridStyles.grid}>
           {projects.map((project: ProjectFields) => {
@@ -72,9 +56,6 @@ export default function Projects() {
             );
           })}
         </div>
-      </main>
-
-      <GlobalFooter />
-    </>
+      </Page>
   );
 }

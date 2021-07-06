@@ -4,9 +4,9 @@ import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 
-import GlobalHead from "../global/head";
-import GlobalHeader from "../global/header";
-import GlobalFooter from "../global/footer";
+import GlobalHead from "../../components/global/head";
+import GlobalHeader from "../../components/global/header";
+import GlobalFooter from "../../components/global/footer";
 import styles from "../../styles/Projects.module.css";
 
 import { makeClient } from "../../content";

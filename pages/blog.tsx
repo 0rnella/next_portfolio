@@ -2,12 +2,9 @@ import { useState, useEffect } from "react";
 import day from "dayjs";
 import Image from "next/image";
 
-import styles from "../styles/Projects.module.css";
 import gridStyles from "../styles/Grid.module.css";
-import GlobalHead from "./global/head";
-import GlobalHeader from "./global/header";
-import GlobalFooter from "./global/footer";
 import { PostFields } from "./post/[slug]";
+import Page from "../components/page";
 
 import { makeClient } from "../content";
 
@@ -31,43 +28,37 @@ export default function Blog() {
   }, [error]);
 
   return (
-    <>
-      <GlobalHead
-        pageTitle="Blog"
-        pageDescription="Blog posts overview: A tech blog with personal news."
-      />
 
-      <GlobalHeader />
+      <Page pageId="2ZKJNrbgiB2i31hjBCKQvs">
 
-      <main className={styles.container}>
-        <h1>Blog</h1>
-        <p>All my writings in one place.</p>
+          <div className={gridStyles.grid}>
+            {blogPosts.map((blogPost: PostFields) => {
+              const { slug, title, description, heroImage, publishDate } =
+                blogPost.fields;
+              const date = day(publishDate).format("DD MMMM YYYY");
 
-        <div className={gridStyles.grid}>
-          {blogPosts.map((blogPost: PostFields) => {
-            const { slug, title, description, heroImage, publishDate } =
-              blogPost.fields;
-            const date = day(publishDate).format("DD MMMM YYYY");
+              return (
+                <a
+                  key={title}
+                  className={gridStyles.card}
+                  href={`post/${slug}`}
+                >
+                  <Image
+                    width={500}
+                    height={250}
+                    src={`https:${heroImage.fields.file.url}`}
+                    alt={title}
+                  />
 
-            return (
-              <a key={title} className={gridStyles.card} href={`post/${slug}`}>
-                <Image
-                  width={500}
-                  height={250}
-                  src={`https:${heroImage.fields.file.url}`}
-                  alt={title}
-                />
+                  <h2>{title}</h2>
+                  <time>{date}</time>
+                  <p>{description}</p>
+                </a>
+              );
+            })}
+          </div>
 
-                <h2>{title}</h2>
-                <time>{date}</time>
-                <p>{description}</p>
-              </a>
-            );
-          })}
-        </div>
-      </main>
+        </Page>
 
-      <GlobalFooter />
-    </>
   );
 }

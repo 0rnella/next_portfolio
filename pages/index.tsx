@@ -1,6 +1,6 @@
-import GlobalHead from "./global/head";
-import GlobalHeader from "./global/header";
-import GlobalFooter from "./global/footer";
+import GlobalHead from "../components/global/head";
+import GlobalHeader from "../components/global/header";
+import GlobalFooter from "../components/global/footer";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {

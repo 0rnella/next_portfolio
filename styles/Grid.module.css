@@ -1,13 +1,13 @@
 .grid {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-around;
   flex-wrap: wrap;
   margin-top: 3rem;
 }
 
 .card {
-  margin: 1rem;
+  margin: 1rem 0;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
@@ -15,7 +15,7 @@
   border: 1px solid #b7e4c7;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  width: 45%;
+  width: 47%;
 }
 
 .card:hover,
