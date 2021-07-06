@@ -8,7 +8,6 @@ import { Document } from "@contentful/rich-text-types";
 import GlobalHead from "../../components/global/head";
 import GlobalHeader from "../../components/global/header";
 import GlobalFooter from "../../components/global/footer";
-import styles from "../../styles/Blog.module.css";
 
 import { makeClient } from "../../content";
 
@@ -54,18 +53,18 @@ export default function Project() {
     fetchPost(client);
   }, [slug, error]);
 
-  const { title, body, heroImage, publishDate } = post.fields;
+  const { title, body, heroImage, publishDate, description } = post.fields;
   const htmlBody = documentToReactComponents(body);
   const logo = heroImage && heroImage.fields.file.url;
   const date = day(publishDate).format("DD MMMM YYYY");
 
   return (
     <>
-      <GlobalHead pageTitle={`Post: ${title}`} pageDescription="Project: " />
+      <GlobalHead pageTitle={`Post: ${title}`} pageDescription={description} />
 
       <GlobalHeader />
 
-      <main className={styles.post}>
+      <main>
         {heroImage && (
           <Image width={1000} height={500} src={`https:${logo}`} alt={logo} />
         )}

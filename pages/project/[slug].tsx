@@ -7,7 +7,6 @@ import { Document } from "@contentful/rich-text-types";
 import GlobalHead from "../../components/global/head";
 import GlobalHeader from "../../components/global/header";
 import GlobalFooter from "../../components/global/footer";
-import styles from "../../styles/Projects.module.css";
 
 import { makeClient } from "../../content";
 
@@ -76,19 +75,39 @@ export default function Project() {
 
       <GlobalHeader />
 
-      <main className={styles.project}>
+      <main>
         <h1>{title}</h1>
 
         {logo && (
-          <Image width={300} height={300} src={`https:${logo}`} alt={logo} />
+          <div
+            style={{
+              position: "relative",
+              maxHeight: "300px",
+              maxWidth: "300px",
+            }}
+          >
+            <Image
+              width={300}
+              height={300}
+              layout="responsive"
+              src={`https:${logo}`}
+              alt={logo}
+            />
+          </div>
         )}
 
-        <h4>Technologies used:</h4>
-        {technologies?.map((tech: string) => (
-          <p className="technology" key={tech}>
-            {tech}
-          </p>
-        ))}
+        {technologies && (
+          <>
+            <h4>Technologies used:</h4>
+            <ul>
+              {technologies.map((tech: string) => (
+                <li className="technology" key={tech}>
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
         {demo && (
           <a href={demo} target="_blank" rel="noopener noreferrer">
             Visit {title} Website

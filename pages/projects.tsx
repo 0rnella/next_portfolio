@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
+import Link from "next/link";
 
 import gridStyles from "../styles/Grid.module.css";
 import Page, { PageFields } from "../components/page";
@@ -33,19 +33,21 @@ export default function Projects(props: {
           const htmlDesc = documentToReactComponents(shortDescription);
 
           return (
-            <a key={title} className={gridStyles.card} href={`project/${slug}`}>
-              <Image
-                width={200}
-                height={200}
-                src={`https:${mainImage.fields.file.url}`}
-                alt={`${title} logo`}
-                className={gridStyles.logo}
-              />
-              <div className="description">
-                <h3>{title}</h3>
-                {htmlDesc}
-              </div>
-            </a>
+            <Link key={title} href={`project/${slug}`}>
+              <a className={gridStyles.card}>
+                <Image
+                  width={200}
+                  height={200}
+                  src={`https:${mainImage.fields.file.url}`}
+                  alt={`${title} logo`}
+                  className={gridStyles.logo}
+                />
+                <div className="description">
+                  <h3>{title}</h3>
+                  {htmlDesc}
+                </div>
+              </a>
+            </Link>
           );
         })}
       </div>

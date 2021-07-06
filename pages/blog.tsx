@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import day from "dayjs";
 import Image from "next/image";
+import Link from "next/link";
 
 import gridStyles from "../styles/Grid.module.css";
 import { PostFields } from "./post/[slug]";
@@ -34,18 +34,20 @@ export default function Blog(props: {
           const date = day(publishDate).format("DD MMMM YYYY");
 
           return (
-            <a key={title} className={gridStyles.card} href={`post/${slug}`}>
-              <Image
-                width={500}
-                height={250}
-                src={`https:${heroImage.fields.file.url}`}
-                alt={title}
-              />
+            <Link key={title} href={`post/${slug}`}>
+              <a className={gridStyles.card}>
+                <Image
+                  width={500}
+                  height={250}
+                  src={`https:${heroImage.fields.file.url}`}
+                  alt={title}
+                />
 
-              <h2>{title}</h2>
-              <time>{date}</time>
-              <p>{description}</p>
-            </a>
+                <h2>{title}</h2>
+                <time>{date}</time>
+                <p>{description}</p>
+              </a>
+            </Link>
           );
         })}
       </div>

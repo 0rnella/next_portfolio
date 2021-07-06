@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import GlobalHead from "../components/global/head";
 import GlobalHeader from "../components/global/header";
 import GlobalFooter from "../components/global/footer";
@@ -12,6 +14,11 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>{"Hi, I'm Ornella Friggit-Konaté."}</h1>
+        <p>
+          Learn <Link href="/about">about me</Link>,{" "}
+          <Link href="/projects">my projects</Link>, or{" "}
+          <Link href="/blog">read my blog</Link>.
+        </p>
       </main>
 
       <GlobalFooter />
