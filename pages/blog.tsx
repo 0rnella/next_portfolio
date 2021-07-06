@@ -4,61 +4,51 @@ import Image from "next/image";
 
 import gridStyles from "../styles/Grid.module.css";
 import { PostFields } from "./post/[slug]";
-import Page from "../components/page";
+import Page, { PageFields } from "../components/page";
 
 import { makeClient } from "../content";
 
 const client = makeClient();
 
-export default function Blog() {
-  const [blogPosts, setBlogPosts] = useState([]);
-  const [error, setError] = useState({});
+export async function getStaticProps() {
+  const page = await client.getEntry("2ZKJNrbgiB2i31hjBCKQvs");
+  const entries = await client.getEntries({ content_type: "blogPost" });
 
-  useEffect(() => {
-    const fetchBlogPosts = async (client: Record<string, any>) => {
-      try {
-        const entries = await client.getEntries({ content_type: "blogPost" });
-        setBlogPosts(entries.items);
-      } catch (err) {
-        setError(err);
-      }
-    };
+  return {
+    props: { page, blogPosts: entries.items },
+  };
+}
 
-    fetchBlogPosts(client);
-  }, [error]);
+export default function Blog(props: {
+  page: PageFields;
+  blogPosts: PostFields[];
+}) {
+  const { page, blogPosts } = props;
 
   return (
+    <Page page={page}>
+      <div className={gridStyles.grid}>
+        {blogPosts.map((blogPost: PostFields) => {
+          const { slug, title, description, heroImage, publishDate } =
+            blogPost.fields;
+          const date = day(publishDate).format("DD MMMM YYYY");
 
-      <Page pageId="2ZKJNrbgiB2i31hjBCKQvs">
+          return (
+            <a key={title} className={gridStyles.card} href={`post/${slug}`}>
+              <Image
+                width={500}
+                height={250}
+                src={`https:${heroImage.fields.file.url}`}
+                alt={title}
+              />
 
-          <div className={gridStyles.grid}>
-            {blogPosts.map((blogPost: PostFields) => {
-              const { slug, title, description, heroImage, publishDate } =
-                blogPost.fields;
-              const date = day(publishDate).format("DD MMMM YYYY");
-
-              return (
-                <a
-                  key={title}
-                  className={gridStyles.card}
-                  href={`post/${slug}`}
-                >
-                  <Image
-                    width={500}
-                    height={250}
-                    src={`https:${heroImage.fields.file.url}`}
-                    alt={title}
-                  />
-
-                  <h2>{title}</h2>
-                  <time>{date}</time>
-                  <p>{description}</p>
-                </a>
-              );
-            })}
-          </div>
-
-        </Page>
-
+              <h2>{title}</h2>
+              <time>{date}</time>
+              <p>{description}</p>
+            </a>
+          );
+        })}
+      </div>
+    </Page>
   );
 }

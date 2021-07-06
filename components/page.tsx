@@ -10,32 +10,19 @@ import { ReactNode } from "react";
 
 const client = makeClient();
 
-type PageFields = {
-    fields: {
-        body: Document;
-        seoDescription: string;
-        title: string;
-    }
-}
+export type PageFields = {
+  fields: {
+    body: Document;
+    seoDescription: string;
+    title: string;
+  };
+};
 
-export default function Page(props: { pageId: string; children?: ReactNode }) {
-  const [page, setPage] = useState({ fields: {} } as PageFields);
-  const [error, setError] = useState({});
-
-  useEffect(() => {
-    const fetchPage = async (client: Record<string, any>) => {
-      try {
-        const entry = await client.getEntry(props.pageId);
-        setPage(entry);
-      } catch (err) {
-        setError(err);
-      }
-    };
-
-    fetchPage(client);
-  }, [props.pageId, error]);
-
-  const { body, title, seoDescription } = page.fields;
+export default function Page(props: {
+  page: PageFields;
+  children?: ReactNode;
+}) {
+  const { body, title, seoDescription } = props.page.fields;
   const htmlBody = documentToReactComponents(body);
 
   return (
