@@ -9,6 +9,10 @@
   background-color: #d8f3dc;
 }
 
+.container p {
+  text-align: center;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;

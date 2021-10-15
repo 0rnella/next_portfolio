@@ -1,5 +1,6 @@
-import styles from "../../styles/Header.module.css";
 import Link from "next/link";
+import styles from "../../styles/Header.module.css";
+import DateRead from "./dateRead";
 
 export default function GlobalHeader() {
   return (
@@ -20,6 +21,7 @@ export default function GlobalHeader() {
         <Link href="/" passHref={true}>
           <a className={styles.logo}>O.F.K.</a>
         </Link>
+        <DateRead />
       </div>
     </header>
   );
