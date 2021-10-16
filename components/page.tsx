@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 
-import GlobalHead from "../components/global/head";
-import GlobalHeader from "../components/global/header";
-import GlobalFooter from "../components/global/footer";
-import { makeClient } from "../content";
+import GlobalHead from "./global/head";
+import GlobalHeader from "./global/header";
+import GlobalFooter from "./global/footer";
+import TrackingScript from "./global/trackingScript";
 import { ReactNode } from "react";
 
-const client = makeClient();
 
 export type PageFields = {
   fields: {
@@ -35,6 +33,7 @@ export default function Page(props: {
         {htmlBody}
         {props.children}
       </main>
+      <TrackingScript />
       <GlobalFooter />
     </>
   );
