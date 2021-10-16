@@ -67,17 +67,16 @@ export const convertDay = (dayNumber: number) : { day: number, month: string } =
     }
 }
 
-    /*
-        This returns the date a new format that I invented, largely based on the International Fixed Calendar
-        https://en.wikipedia.org/wiki/International_Fixed_Calendar
-        It's mostly a joke but also I think it is logical and fun
-    */
-export const getDate = () : OrnellemberDay => {
-    const now = new Date();
-    const dayNumber = getDayNumber(now);
-    const convertedDay = convertDay(dayNumber);
+/*
+    This returns the date a new format that I invented, largely based on the International Fixed Calendar
+    https://en.wikipedia.org/wiki/International_Fixed_Calendar
+    It's mostly a joke but also I think it is logical and fun
+*/
+export const getDate = (date: Date) : OrnellemberDay => {
+    const year = date.getFullYear();
 
-    const year = now.getFullYear();
+    const dayNumber = getDayNumber(date);
+    const convertedDay = convertDay(dayNumber);
 
     return {...convertedDay, year };
 }
