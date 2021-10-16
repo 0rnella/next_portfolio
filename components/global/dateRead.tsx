@@ -1,7 +1,7 @@
-import { getDate } from '../utils/getDate';
+import { convertDateToOrnellember } from '../utils/getDate';
 
 export default function DateRead() {
-    const currentDate = getDate(new Date());
+    const currentDate = convertDateToOrnellember(new Date());
 
   return (
       <p>

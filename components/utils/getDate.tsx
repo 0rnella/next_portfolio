@@ -72,7 +72,7 @@ export const convertDay = (dayNumber: number) : { day: number, month: string } =
     https://en.wikipedia.org/wiki/International_Fixed_Calendar
     It's mostly a joke but also I think it is logical and fun
 */
-export const getDate = (date: Date) : OrnellemberDay => {
+export const convertDateToOrnellember = (date: Date) : OrnellemberDay => {
     const year = date.getFullYear();
 
     const dayNumber = getDayNumber(date);
