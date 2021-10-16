@@ -1,9 +1,9 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
 import Link from "next/link";
 
 import gridStyles from "../styles/Grid.module.css";
 import Page, { PageFields } from "../components/page";
+import RichTextToHtml from "../components/global/richTextToHtml";
 import { ProjectFields } from "./project/[slug]";
 
 import { makeClient } from "../content";
@@ -30,7 +30,6 @@ export default function Projects(props: {
       <div className={gridStyles.grid}>
         {projects.map((project: ProjectFields) => {
           const { slug, title, shortDescription, mainImage } = project.fields;
-          const htmlDesc = documentToReactComponents(shortDescription);
 
           return (
             <Link key={title} href={`project/${slug}`}>
@@ -44,7 +43,7 @@ export default function Projects(props: {
                 />
                 <div className="description">
                   <h3>{title}</h3>
-                  {htmlDesc}
+                  <RichTextToHtml body={shortDescription}/>
                 </div>
               </a>
             </Link>

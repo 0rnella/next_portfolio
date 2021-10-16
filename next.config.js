@@ -1,7 +1,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["https://images.ctfassets.net"],
+    domains: ['images.ctfassets.net'],
   },
   target: "serverless",
 };

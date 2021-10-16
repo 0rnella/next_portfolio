@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document } from "@contentful/rich-text-types";
 
 import GlobalHead from "../../components/global/head";
 import GlobalHeader from "../../components/global/header";
 import GlobalFooter from "../../components/global/footer";
+import RichTextToHtml from "../../components/global/richTextToHtml";
 
 import { makeClient } from "../../content";
 
@@ -63,7 +62,6 @@ export default function Project() {
     demo,
     technologies,
   } = project.fields;
-  const htmlDesc = documentToReactComponents(description);
   const logo = mainImage && mainImage.fields.file.url;
 
   return (
@@ -118,7 +116,7 @@ export default function Project() {
             View {title} Code on Github
           </a>
         )}
-        {htmlDesc}
+        <RichTextToHtml body={description} />
       </main>
 
       <GlobalFooter />

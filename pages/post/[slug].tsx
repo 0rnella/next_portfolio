@@ -2,12 +2,12 @@ import day from "dayjs";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document } from "@contentful/rich-text-types";
+
 
 import GlobalHead from "../../components/global/head";
 import GlobalHeader from "../../components/global/header";
 import GlobalFooter from "../../components/global/footer";
+import RichTextToHtml from "../../components/global/richTextToHtml";
 
 import { makeClient } from "../../content";
 
@@ -29,6 +29,7 @@ export type PostFields = {
     publishDate: string;
   };
 };
+
 
 export default function Project() {
   const router = useRouter();
@@ -54,7 +55,6 @@ export default function Project() {
   }, [slug, error]);
 
   const { title, body, heroImage, publishDate, description } = post.fields;
-  const htmlBody = documentToReactComponents(body);
   const logo = heroImage && heroImage.fields.file.url;
   const date = day(publishDate).format("DD MMMM YYYY");
 
@@ -71,7 +71,7 @@ export default function Project() {
         <h1>{title}</h1>
         <time>{date}</time>
 
-        {htmlBody}
+        <RichTextToHtml body={body} />
       </main>
 
       <GlobalFooter />
