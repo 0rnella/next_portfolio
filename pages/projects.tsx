@@ -34,13 +34,15 @@ export default function Projects(props: {
           return (
             <Link key={title} href={`project/${slug}`}>
               <a className={gridStyles.card}>
-                <Image
-                  width={200}
-                  height={200}
-                  src={`https:${mainImage.fields.file.url}`}
-                  alt={`${title} logo`}
-                  className={gridStyles.logo}
-                />
+                { mainImage &&
+                  <Image
+                    width={200}
+                    height={200}
+                    src={`https:${mainImage.fields.file.url}`}
+                    alt={`${title} logo`}
+                    className={gridStyles.logo}
+                  />
+                }
                 <div className="description">
                   <h3>{title}</h3>
                   <RichTextToHtml body={shortDescription}/>
