@@ -6,9 +6,10 @@ import Image from "next/image";
 const renderOptions = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+        console.log('IMAGE URL', `https:${node.data.target.fields.file.url}`)
         return (
           <Image
-            src={`https://${node.data.target.fields.file.url}`}
+            src={`https:${node.data.target.fields.file.url}`}
             height={node.data.target.fields.file.details.image.height}
             width={node.data.target.fields.file.details.image.width}
             alt={node.data.target.fields.description}
