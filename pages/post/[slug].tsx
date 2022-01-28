@@ -60,7 +60,7 @@ export default function Project() {
 
   return (
     <>
-      <GlobalHead pageTitle={`Post: ${title}`} pageDescription={description} />
+      <GlobalHead pageTitle={`Post: ${title || "Ornella's Blog"}`} pageDescription={description} />
 
       <GlobalHeader />
 
