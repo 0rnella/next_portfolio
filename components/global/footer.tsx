@@ -6,7 +6,6 @@ export default function GlobalFooter() {
       {[
         { label: "GitHub", url: "https://github.com/0rnella" },
         { label: "LinkedIn", url: "https://www.linkedin.com/mynetwork/" },
-        { label: "Polywork", url: "https://www.polywork.com/ornella" },
       ].map((link) => (
         <a
           href={link.url}
