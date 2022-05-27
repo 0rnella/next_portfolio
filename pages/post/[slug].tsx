@@ -1,4 +1,5 @@
 import day from "dayjs";
+import ornellember from 'ornellember';
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -10,6 +11,7 @@ import GlobalFooter from "../../components/global/footer";
 import RichTextToHtml from "../../components/global/richTextToHtml";
 
 import { makeClient } from "../../content";
+import Link from "next/link";
 
 const client = makeClient();
 
@@ -57,6 +59,7 @@ export default function Project() {
   const { title, body, heroImage, publishDate, description } = post.fields;
   const logo = heroImage && heroImage.fields.file.url;
   const date = day(publishDate).format("DD MMMM YYYY");
+  const ornellemberDate = ornellember(new Date(publishDate)).format();
 
   return (
     <>
@@ -69,7 +72,7 @@ export default function Project() {
           <Image width={1000} height={500} src={`https:${logo}`} alt={logo} />
         )}
         <h1>{title}</h1>
-        <time>{date}</time>
+        <time>{date} (gregorian) &nbsp;|&nbsp; {ornellemberDate} <Link href="/project/ornellember">(ornellember)</Link></time>
 
         <RichTextToHtml body={body} />
       </main>
