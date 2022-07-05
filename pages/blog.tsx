@@ -7,10 +7,13 @@ import { PostFields } from "./post/[slug]";
 import Page, { PageFields } from "../components/page";
 
 import { client } from "../scripts/content";
+import { generate } from "../scripts/generate-rss";
 
 export async function getStaticProps() {
   const page = await client.getEntry("2ZKJNrbgiB2i31hjBCKQvs");
   const entries = await client.getEntries({ content_type: "blogPost" });
+
+  await generate();
 
   return {
     props: { page, blogPosts: entries.items },

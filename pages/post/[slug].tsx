@@ -15,7 +15,7 @@ import Link from "next/link";
 
 export type PostFields = {
   fields: {
-    title?: string;
+    title: string;
     slug: string;
     description: string;
     body: Document;
