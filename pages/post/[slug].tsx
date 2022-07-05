@@ -10,10 +10,8 @@ import GlobalHeader from "../../components/global/header";
 import GlobalFooter from "../../components/global/footer";
 import RichTextToHtml from "../../components/global/richTextToHtml";
 
-import { makeClient } from "../../content";
+import { client } from "../../scripts/content";
 import Link from "next/link";
-
-const client = makeClient();
 
 export type PostFields = {
   fields: {

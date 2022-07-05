@@ -6,9 +6,7 @@ import gridStyles from "../styles/Grid.module.css";
 import { PostFields } from "./post/[slug]";
 import Page, { PageFields } from "../components/page";
 
-import { makeClient } from "../content";
-
-const client = makeClient();
+import { client } from "../scripts/content";
 
 export async function getStaticProps() {
   const page = await client.getEntry("2ZKJNrbgiB2i31hjBCKQvs");

@@ -7,7 +7,7 @@ import GlobalHeader from "../../components/global/header";
 import GlobalFooter from "../../components/global/footer";
 import RichTextToHtml from "../../components/global/richTextToHtml";
 
-import { makeClient } from "../../content";
+import { makeClient } from "../../scripts/content";
 
 const client = makeClient();
 

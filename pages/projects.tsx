@@ -6,9 +6,7 @@ import Page, { PageFields } from "../components/page";
 import RichTextToHtml from "../components/global/richTextToHtml";
 import { ProjectFields } from "./project/[slug]";
 
-import { makeClient } from "../content";
-
-const client = makeClient();
+import { client } from "../scripts/content";
 
 export async function getStaticProps() {
   const page = await client.getEntry("7mvHFS28HOJUgeYYZKHdWu");
